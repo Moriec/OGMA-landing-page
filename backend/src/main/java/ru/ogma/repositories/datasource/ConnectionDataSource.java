@@ -1,4 +1,4 @@
-package ru.ogma.utils;
+package ru.ogma.repositories.datasource;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
