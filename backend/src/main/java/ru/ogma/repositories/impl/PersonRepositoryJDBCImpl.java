@@ -1,10 +1,10 @@
-package ru.ogma.services.impl;
+package ru.ogma.repositories.impl;
 
 import ru.ogma.entities.Person;
 import ru.ogma.exceptions.DatabaseOperationException;
 import ru.ogma.exceptions.EmailAlreadyExistsException;
 import ru.ogma.exceptions.PersonNotFoundException;
-import ru.ogma.services.PersonRepository;
+import ru.ogma.repositories.PersonRepository;
 
 import javax.sql.DataSource;
 import java.sql.*;
