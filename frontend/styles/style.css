@@ -1,9 +1,17 @@
 body {
   font-family: 'Montserrat', 'Arial', sans-serif;
+  padding-top: 80px;
+  margin: 0;
 }
 
 .header {
   border-bottom: 1px solid #000;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 5px #0000001a;
 }
 
 .header__navigation {
