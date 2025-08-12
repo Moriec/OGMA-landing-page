@@ -1,11 +1,10 @@
 package ru.ogma.utils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PropertiesSinglton {
+public class PropertiesSingleton {
     private static Properties properties;
 
     public static Properties getInstance() throws IOException {
