@@ -16,4 +16,8 @@ public class PropertiesSinglton {
         properties = new Properties();
         properties.load(new FileInputStream(locationConfFile));
     }
+
+    public static String get(String key) {
+        return properties.getProperty(key);
+    }
 }

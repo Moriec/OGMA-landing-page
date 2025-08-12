@@ -64,6 +64,7 @@ public class RegisterPersonController implements HttpHandler {
 
     private void invalidRequestType(HttpExchange exchange) throws IOException {
         addCors(exchange);
+        System.out.print("Запрос пришел");
         exchange.sendResponseHeaders(HTTPStatus.METHOD_NOT_ALLOWED.code(), -1);
     }
 
