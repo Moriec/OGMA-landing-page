@@ -13,6 +13,7 @@ import ru.ogma.utils.PropertiesSingleton;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Scanner;
 
 public class Main {
 
@@ -49,6 +50,14 @@ public class Main {
             server.start();
             logger.info("Сервер запущен на порту {}", Integer.parseInt(PropertiesSingleton.get("server.port")));
 
+            while(true) {
+                String consoleRequest = new Scanner(System.in).nextLine();
+                if (consoleRequest.equals("exit")) {
+                    server.stop(0);
+                    logger.info("Плановая остановка сервера\n");
+                    System.exit(0);
+                }
+            }
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new RuntimeException(e);
