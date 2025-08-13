@@ -14,45 +14,71 @@
 
 <body>
   <header class="header">
-    <img src="img/logo.svg" alt="Логотип компании">
+    <nav class="header__navigation">
+      <img src="img/logo.svg" alt="Логотип компании">
+      <ul class="navigation-list">
+        <li class="navigation-list__item">
+          <a href="#abilities" class="navigation-list__link">Возможности</a>
+        </li>
+        <li class="navigation-list__item">
+          <a href="#comparison" class="navigation-list__link">Сравнение</a>
+        </li>
+        <li class="navigation-list__item">
+          <a href="#team" class="navigation-list__link">Команда</a>
+        </li>
+        <li class="navigation-list__item">
+          <a href="#contacts" class="navigation-list__link">Контакты</a>
+        </li>
+      </ul>
+    </nav>
   </header>
   <main class="main">
-    <header class="introduction">
-      <p>OGMA - ИИ-ассистент для анализа коммуникаций</p>
-      <p>Единый инструмент для поиска, сбора и анализа сообщений в соцсетях и мессенджерах</p>
+    <header class="main__header">
+      <div class="main__header-left-block">
+        <p class="main__header-text">ИИ-ассистент для анализа коммуникаций</p>
+        <p class="main__under-header-text">Единый инструмент для сбора, анализа и поиска сообщений в соцсетях и
+          мессенджерах</p>
+        <div class="main__testing-application-form-button">
+          <a href="#testing-application-form" class="main__testing-application-form-ref">Записаться на тестирование</a>
+        </div>
+      </div>
+      <div class="main__header-right-block">
+        <p class="user-message message">Найди сообщение про встречу</p>
+        <p class="bot-message message">Найдено 3 сообщения о встречах за последний месяц</p>
+      </div>
     </header>
-    <div class="problem-solution-container">
-      <div class="block problem">
+    <div class="main__problem-solution-container">
+      <div class="block main__problem">
         <p><b>Проблема</b></p>
         <p>Информационная перегрузка, потеря важных сообщений, невозможность провести аналитический обзор коммуникаций в
           разных мессенджерах</p>
       </div>
-      <div class="block solution">
+      <div class="block main__solution">
         <p><b>Наше решение</b></p>
         <p>Объединить ваши чаты и сообщения в одном интерфейсе, сделать ИИ-анализ и удобный поиск, чтобы вы всегда
           находили нужное</p>
       </div>
     </div>
     <h2>Преимущества нашего продукта перед конкурентами</h2>
-    <section class="product-advantages">
-      <article class="advantage-card">
+    <section class="main__product-advantages">
+      <article class="main__advantage-card">
         <img src="img/search.svg" alt="Лупа" height="30" width="30">
         <p>Возможность семантического поиска (поиска по смыслу) сообщений</p>
       </article>
-      <article class="advantage-card">
+      <article class="main__advantage-card">
         <img src="img/multi-platform.svg" alt="Мультиплатформенность" height="30" width="30">
         <p>Мультиплатформенность - работает с VK, Telegram и другими платформами</p>
       </article>
-      <article class="advantage-card">
+      <article class="main__advantage-card">
         <img src="img/money-bag.svg" alt="Мешочек с деньгами" height="30" width="30">
         <p>Доступная цена</p>
       </article>
-      <article class="advantage-card">
+      <article class="main__advantage-card">
         <img src="img/universal-access.svg" alt="Универсальность" height="30" width="30">
         <p>Подходит как для частных пользователей, так и для специалистов</p>
       </article>
     </section>
-    <section class="comparison">
+    <section class="main__comparison" id="comparison">
       <div class="table-header">Решение</div>
       <div class="table-header">OGMA</div>
       <div class="table-header">МТС Линк ИИ-помощник</div>

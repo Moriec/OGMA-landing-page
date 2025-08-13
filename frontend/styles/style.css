@@ -1,57 +1,161 @@
 body {
   font-family: 'Montserrat', 'Arial', sans-serif;
+  padding-top: 80px;
+  margin: 0;
+  background: linear-gradient(135deg, #fff, #c7c7c7);
 }
 
 .header {
   border-bottom: 1px solid #000;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 5px #0000001a;
 }
 
-.introduction {
-  font-size: 25px;
+.header__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  inline-size: 50%;
+  min-inline-size: 700px;
+  margin: 0 auto;
 }
 
-.problem-solution {
+.navigation-list {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  margin: 0;
+  padding-inline-start: 0;
+}
+
+.navigation-list__item {
+  margin-inline-start: 40px;
+}
+
+.navigation-list__link {
+  display: inline-block;
+  padding-block: 24px;
+  text-decoration-line: none;
+  color: #000;
+}
+
+.navigation-list__link:hover {
+  padding-bottom: 20px;
+  border-bottom: 4px solid currentColor;
+  color: #000;
+}
+
+.main__header {
+  display: flex;
+  justify-content: center;
+  gap: 10vw;
+  margin: 10px;
+  height: 100vh;
+}
+
+.main__header-left-block {
+  width: 500px;
+  margin-top: 15vh;
+}
+
+.main__header-text {
+  font-size: 45px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.main__under-header-text {
+  font-size: 17px;
+  color: #696868;
+}
+
+.main__testing-application-form-button {
+  background: linear-gradient(135deg, #9c3ff8, #8000ff);
+  border-radius: 12px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+}
+
+.main__testing-application-form-ref {
+  display: block;
+  text-decoration-line: none;
+  color: #fff;
+  padding: 5%;
+}
+
+.main__header-right-block {
+  background-color: #fff;
+  padding: 10px 10px 20px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px #00000048;
+  height: 210px;
+  width: 400px;
+  margin-top: 25vh;
+}
+
+.message {
+  font-size: 16px;
+  padding: 25px;
+  border-radius: 12px;
+  width: 300px;
+}
+
+.user-message {
+  color: #fff;
+  background: linear-gradient(135deg, #9c3ff8, #8000ff);
+  float: right;
+}
+
+.bot-message {
+  background-color: #d4d4d4;
+  margin-top: 120px;
+}
+
+
+.main__problem-solution-container {
   display: flex;
   gap: 20px;
   margin: 40px 0;
 }
 
 .block {
-  padding: 25px;
+  padding: 5px 25px;
   border-radius: 12px;
   flex: 1;
-  box-shadow: 0 4px 12px #0000001a
-}
-
-.block {
+  box-shadow: 0 4px 12px #0000001a;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .block:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.problem {
+.main__problem {
   background: #fff;
   border: 2px solid #ff5252;
 }
 
-.solution {
+.main__solution {
   background: linear-gradient(135deg, #9c3ff8, #8000ff);
   color: white;
 }
 
-.product-advantages {
+.main__product-advantages {
   display: flex;
 }
 
-.advantage-card {
-  width: 30vw;
+.main__advantage-card {
   text-align: center;
+  flex: 1;
 }
 
-.comparison {
+.main__comparison {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -59,7 +163,7 @@ body {
   text-align: center;
 }
 
-.comparison div {
+.main__comparison div {
   border: 1px dashed #8000ff;
   padding-top: 5px;
 }
@@ -70,12 +174,12 @@ body {
   font-weight: bold;
 }
 
-.comparison .advantage {
+.main__comparison .advantage {
   background-color: #aee7ae;
   color: #8000ff;
 }
 
-.comparison .disadvantage {
+.main__comparison .disadvantage {
   background-color: #ebc6c6;
   color: #f00;
 }
