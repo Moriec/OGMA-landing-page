@@ -28,10 +28,13 @@ public class PersonService {
             try {
                 personRepository.save(person);
             } catch (EmailAlreadyExistsException e) {
+                logger.warn(e.getMessage());
                 personRepository.update(person);
             }
+            logger.info("Отправить ответ с кодом {}", HTTPStatus.NO_CONTENT.code());
             return HTTPStatus.NO_CONTENT.code(); // 204
         } catch (DatabaseOperationException | PersonNotFoundException e) {
+            logger.warn("Критическая ошибка при попытке сохранения Person: {}", e.getMessage());
             return HTTPStatus.INTERNAL_SERVER_ERROR.code(); // 500
         }
     }
@@ -40,12 +43,15 @@ public class PersonService {
         try {
             Person person = PersonParse.parseJsonToPerson(bodyJson);
             if (!PersonValidator.isPersonValidate(person)) {
+                logger.warn("Данные, присланные клиентом, не являются валидными");
                 return HTTPStatus.UNPROCESSABLE_CONTENT.code(); // 422
             }
             return savePerson(person);
         } catch (PersonJsonDecodingException e) {
+            logger.warn("Плохой запрос от клиента: ", e.getMessage());
             return HTTPStatus.BAD_REQUEST.code(); // 400
         } catch (NullPointerException e) {
+            logger.error("Одна из переменных не инициализирована: {}", e.getMessage());
             return HTTPStatus.INTERNAL_SERVER_ERROR.code(); // 500
         }
     }
