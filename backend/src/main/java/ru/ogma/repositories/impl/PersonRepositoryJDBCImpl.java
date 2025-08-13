@@ -56,7 +56,7 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
                 if(generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
                     person.setId(id);
-                    logger.info("Успешно добавить Person в бд с id {}", id);
+                    logger.info("Успешно добавлен Person в бд с id {}", id);
                 }
                 else{
                     logger.error("Не удалось получить id добавленной записи");
