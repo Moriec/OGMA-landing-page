@@ -1,5 +1,7 @@
 package ru.ogma.repositories.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.ogma.entities.Person;
 import ru.ogma.exceptions.DatabaseOperationException;
 import ru.ogma.exceptions.EmailAlreadyExistsException;
@@ -11,7 +13,8 @@ import java.sql.*;
 
 public class PersonRepositoryJDBCImpl implements PersonRepository {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
+    private static final Logger logger = LoggerFactory.getLogger(PersonRepositoryJDBCImpl.class);
 
     private final String SQL_INSERT = "insert into persons (username, email) values (?, ?)";
     private final String SQL_EXISTS_BY_EMAIL = "select 1 from persons where email = ? limit 1";
@@ -23,15 +26,19 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
 
     @Override
     public void save(Person person) throws EmailAlreadyExistsException {
+
         if(existsByEmail(person.getEmail())){
+            logger.warn("Этот емайл уже существует в бд");
             throw new EmailAlreadyExistsException("Емайл уже существует");
         }
 
         executeRequest(person, SQL_INSERT);
     }
 
+    @Override
     public void update(Person person) throws DatabaseOperationException, PersonNotFoundException {
         if(!existsByEmail(person.getEmail())){
+            logger.error("Попытка обновить Person в бд когда бд не содержит такой же емайл");
             throw new PersonNotFoundException("База данных не содержит email " + person.getEmail());
         }
         executeRequest(person, SQL_UPDATE);
@@ -49,12 +56,15 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
                 if(generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
                     person.setId(id);
+                    logger.info("Успешно добавлен Person в бд с id {}", id);
                 }
                 else{
+                    logger.error("Не удалось получить id добавленной записи");
                     throw new SQLException("Не удалось получить id записи");
                 }
             }
         } catch (SQLException e) {
+            logger.error("Ошибка в работе бд: {}", e.getMessage());
             throw new DatabaseOperationException(e.getMessage());
         }
     }
@@ -68,6 +78,7 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
                 return resultSet.next();
             }
         } catch (SQLException e) {
+            logger.error("Ошибка в работе бд при поиске одинаковых емайл: {}", e.getMessage());
             throw new DatabaseOperationException(e.getMessage());
         }
     }

@@ -41,3 +41,6 @@ build/
 
 ###Config
 backend/config.properties
+
+###logs
+logs/*
