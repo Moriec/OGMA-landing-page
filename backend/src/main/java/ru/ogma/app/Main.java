@@ -3,6 +3,7 @@ package ru.ogma.app;
 import com.sun.net.httpserver.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.ogma.console.AdminConsole;
 import ru.ogma.controllers.RegisterPersonController;
 import ru.ogma.repositories.PersonRepository;
 import ru.ogma.repositories.datasource.ConnectionDataSource;
@@ -50,14 +51,9 @@ public class Main {
             server.start();
             logger.info("Сервер запущен на порту {}", Integer.parseInt(PropertiesSingleton.get("server.port")));
 
-            while(true) {
-                String consoleRequest = new Scanner(System.in).nextLine();
-                if (consoleRequest.equals("exit")) {
-                    server.stop(0);
-                    logger.info("Плановая остановка сервера\n");
-                    System.exit(0);
-                }
-            }
+            // Запуск админ консоли
+            AdminConsole adminConsole = new AdminConsole(server);
+            adminConsole.start();
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new RuntimeException(e);
