@@ -2,7 +2,7 @@ body {
   font-family: 'Montserrat', 'Arial', sans-serif;
   padding-top: 80px;
   margin: 0;
-  background: linear-gradient(135deg, #fff, #c7c7c7);
+  background: linear-gradient(90deg, #fff, #c7c7c7);
 }
 
 .header {
@@ -195,4 +195,62 @@ h2 {
 .main__comparison .disadvantage {
   background-color: #ebc6c6;
   color: #f00;
+}
+
+.main__about-team {
+    position: relative;
+    padding: 10px 30px;
+    border-left: 5px solid #8000ff;
+    border-bottom: 5px solid #8000ff;
+    border-right: 5px solid #8000ff;
+    border-radius: 0 0 15px 15px;
+    margin: 50px 30px 20px;
+}
+.main__about-team-header {
+    display: flex;
+    position: absolute;
+    align-items: flex-end;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: translateY(-190%);
+}
+.main__about-team-header:before {
+    content: "";
+    flex: 1;
+    height: 15px;
+    margin-right: 15px;
+    border-top: 5px solid #8000ff;
+    border-left: 5px solid #8000ff;
+    border-radius: 15px 0;
+    transform: translateX(-5px);
+}
+.main__about-team-header:after {
+    content: "";
+    flex: 1;
+    height: 15px;
+    margin-left: 15px;
+    border-top: 5px solid #8000ff;
+    border-right: 5px solid #8000ff;
+    border-radius: 0 15px;
+    transform: translateX(5px);
+}
+
+.main__team-member-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.main__team-member-card {
+  flex: 1;
+  text-align: center;
+}
+
+.main__team-member-photo {
+  border-radius: 50%;
 }
