@@ -11,7 +11,7 @@ public class PersonValidator {
 
     public static boolean isPersonValidate(Person person) throws NullPointerException {
         if (person == null) {
-            logger.error("Person is null");
+            logger.warn("Person is null");
             throw new NullPointerException("Person is null");
         }
         return isNameCorrect(person) && isEmailCorrect(person);
@@ -19,7 +19,7 @@ public class PersonValidator {
 
     private static boolean isNameCorrect(Person person) throws NullPointerException {
         if (person.getUsername() == null) {
-            logger.error("Person.username is null");
+            logger.warn("Person.username is null");
             throw new NullPointerException("Person.Username is null");
         }
         if (person.getUsername().length() > 50 || person.getUsername().isEmpty()) {
@@ -31,7 +31,7 @@ public class PersonValidator {
 
     private static boolean isEmailCorrect(Person person) throws NullPointerException {
         if (person.getEmail() == null) {
-            logger.error("Person.email is null");
+            logger.warn("Person.email is null");
             throw new NullPointerException("Person.Email is null");
         }
         if (EmailValidator.getInstance().isValid(person.getEmail())){

@@ -33,7 +33,7 @@ public class PersonServiceTest {
 
     @Test
     public void personIsNull() {
-        assertEquals(HTTPStatus.INTERNAL_SERVER_ERROR.code(), personService.savePerson(null));
+        assertEquals(HTTPStatus.BAD_REQUEST.code(), personService.savePerson(null));
     }
 
     @Test
