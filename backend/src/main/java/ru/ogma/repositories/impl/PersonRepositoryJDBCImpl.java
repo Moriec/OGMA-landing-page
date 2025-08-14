@@ -69,7 +69,7 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
         }
     }
 
-    public boolean existsByEmail(String email){
+    private boolean existsByEmail(String email){
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_EXISTS_BY_EMAIL)) {
             preparedStatement.setString(1, email);

@@ -47,12 +47,9 @@ public class PersonService {
                 return HTTPStatus.UNPROCESSABLE_CONTENT.code(); // 422
             }
             return savePerson(person);
-        } catch (PersonJsonDecodingException e) {
-            logger.warn("Плохой запрос от клиента: ", e.getMessage());
+        } catch (PersonJsonDecodingException | NullPointerException e) {
+            logger.warn("Плохой запрос от клиента: {}", e.getMessage());
             return HTTPStatus.BAD_REQUEST.code(); // 400
-        } catch (NullPointerException e) {
-            logger.error("Одна из переменных не инициализирована: {}", e.getMessage());
-            return HTTPStatus.INTERNAL_SERVER_ERROR.code(); // 500
         }
     }
 }

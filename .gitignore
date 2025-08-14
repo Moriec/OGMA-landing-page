@@ -44,3 +44,4 @@ backend/config.properties
 
 ###logs
 logs/*
+backend/logs/*

@@ -3,6 +3,7 @@ package ru.ogma.app;
 import com.sun.net.httpserver.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.ogma.console.AdminConsole;
 import ru.ogma.controllers.RegisterPersonController;
 import ru.ogma.repositories.PersonRepository;
 import ru.ogma.repositories.datasource.ConnectionDataSource;
@@ -13,6 +14,7 @@ import ru.ogma.utils.PropertiesSingleton;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Scanner;
 
 public class Main {
 
@@ -49,6 +51,9 @@ public class Main {
             server.start();
             logger.info("Сервер запущен на порту {}", Integer.parseInt(PropertiesSingleton.get("server.port")));
 
+            // Запуск админ консоли
+            AdminConsole adminConsole = new AdminConsole(server);
+            adminConsole.start();
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new RuntimeException(e);
