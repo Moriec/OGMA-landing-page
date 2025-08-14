@@ -11,6 +11,12 @@ import ru.ogma.repositories.PersonRepository;
 import javax.sql.DataSource;
 import java.sql.*;
 
+/**
+ * JDBC-реализация {@link ru.ogma.repositories.PersonRepository} на основе {@link DataSource}.
+ *
+ * Поддерживает операции сохранения и обновления по полю email с проверкой уникальности.
+ * В случае ошибок уровня JDBC оборачивает их в {@link DatabaseOperationException}.
+ */
 public class PersonRepositoryJDBCImpl implements PersonRepository {
 
     private final DataSource dataSource;
@@ -24,6 +30,10 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Сохраняет нового пользователя. Бросает {@link EmailAlreadyExistsException},
+     * если запись с таким email уже существует.
+     */
     @Override
     public void save(Person person) throws EmailAlreadyExistsException {
 
@@ -35,6 +45,10 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
         executeRequest(person, SQL_INSERT);
     }
 
+    /**
+     * Обновляет имя пользователя по email. Бросает {@link PersonNotFoundException},
+     * если запись с таким email отсутствует.
+     */
     @Override
     public void update(Person person) throws DatabaseOperationException, PersonNotFoundException {
         if(!existsByEmail(person.getEmail())){
@@ -44,6 +58,10 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
         executeRequest(person, SQL_UPDATE);
     }
 
+    /**
+     * Выполняет SQL-запрос и считывает сгенерированный ключ.
+     * В случае ошибок JDBC выбрасывает {@link DatabaseOperationException}.
+     */
     private void executeRequest(Person person, String sqlUpdate) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate,  Statement.RETURN_GENERATED_KEYS)) {
@@ -69,6 +87,9 @@ public class PersonRepositoryJDBCImpl implements PersonRepository {
         }
     }
 
+    /**
+     * Проверяет существование записи по email.
+     */
     private boolean existsByEmail(String email){
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_EXISTS_BY_EMAIL)) {

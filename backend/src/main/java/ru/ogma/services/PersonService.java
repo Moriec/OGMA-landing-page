@@ -14,6 +14,20 @@ import ru.ogma.utils.PersonParse;
 import ru.ogma.utils.PersonValidator;
 
 
+/**
+ * Сервис для регистрации/сохранения сущности {@link ru.ogma.entities.Person}.
+ *
+ * Отвечает за оркестрацию этапов:
+ * - парсинг JSON в {@link ru.ogma.entities.Person}
+ * - валидацию данных
+ * - сохранение/обновление через {@link PersonRepository}
+ *
+ * Возвращает HTTP-коды из {@link HTTPStatus} для упрощения маппинга на ответ контроллера:
+ * - 204 (NO_CONTENT) — успешное сохранение/обновление
+ * - 400 (BAD_REQUEST) — некорректный JSON или отсутствующие обязательные поля
+ * - 422 (UNPROCESSABLE_CONTENT) — данные валидного формата, но не проходят бизнес-валидацию
+ * - 500 (INTERNAL_SERVER_ERROR) — ошибки уровня БД или прочие критические сбои
+ */
 public class PersonService {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
@@ -23,6 +37,9 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    /**
+     * Сохраняет {@link Person}. Если email уже существует — выполняет обновление записи.
+     */
     private int savePerson(Person person) {
         try {
             try {
@@ -39,6 +56,10 @@ public class PersonService {
         }
     }
 
+    /**
+     * Принимает тело запроса в формате JSON, конвертирует в {@link Person}, валидирует
+     * и сохраняет/обновляет через репозиторий.
+     */
     public int savePerson(String bodyJson) {
         try {
             Person person = PersonParse.parseJsonToPerson(bodyJson);
