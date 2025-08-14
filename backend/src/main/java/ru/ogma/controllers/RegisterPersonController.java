@@ -14,6 +14,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 
+/**
+ * HTTP-контроллер регистрации пользователя.
+ *
+ * Обрабатывает методы:
+ * - POST — принимает JSON тела запроса, делегирует сохранение в {@link PersonService},
+ *   выставляет CORS и возвращает соответствующий HTTP-код
+ * - OPTIONS — CORS preflight
+ * Для остальных методов возвращает 405 (METHOD_NOT_ALLOWED).
+ */
 public class RegisterPersonController implements HttpHandler {
 
     private final PersonService personService;
@@ -23,6 +32,10 @@ public class RegisterPersonController implements HttpHandler {
         this.personService = personService;
     }
 
+
+    /**
+     * Точка входа обработчика HTTP-запроса. Выполняет диспетчеризацию по HTTP-методу
+     */
     @Override
     public void handle(HttpExchange exchange) {
         logger.info("Перехвачен запрос с методом {}", exchange.getRequestMethod());
@@ -46,6 +59,9 @@ public class RegisterPersonController implements HttpHandler {
         }
     }
 
+    /**
+     * Обработка POST-запроса: читает тело запроса, вызывает сервис и отправляет код ответа.
+     */
     private void doPost(HttpExchange exchange) throws IOException {
         logger.debug("Обработка метода Post");
         try (InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
@@ -63,18 +79,27 @@ public class RegisterPersonController implements HttpHandler {
         }
     }
 
+    /**
+     * Ответ на preflight-запросы CORS.
+     */
     private void doOptions(HttpExchange exchange) throws IOException {
         addCors(exchange);
         exchange.sendResponseHeaders(HTTPStatus.NO_CONTENT.code(), -1);
         logger.info("Для OPTIONS метода отправлен код: {}", HTTPStatus.NO_CONTENT.code());
     }
 
+    /**
+     * Обработчик неподдерживаемого HTTP-метода.
+     */
     private void invalidRequestType(HttpExchange exchange) throws IOException {
         addCors(exchange);
         exchange.sendResponseHeaders(HTTPStatus.METHOD_NOT_ALLOWED.code(), -1);
         logger.debug("Для {} метода отправлен код: {}", exchange.getRequestMethod(), HTTPStatus.METHOD_NOT_ALLOWED.code());
     }
 
+    /**
+     * Устанавливает CORS-заголовки для ответа.
+     */
     private void addCors(HttpExchange exchange) {
         var h = exchange.getResponseHeaders();
         h.add("Access-Control-Allow-Origin", "*");
@@ -82,6 +107,9 @@ public class RegisterPersonController implements HttpHandler {
         h.add("Access-Control-Allow-Methods", "POST, OPTIONS");
     }
 
+    /**
+     * Безопасно отправляет ответ 500, игнорируя вторичные ошибки I/O.
+     */
     private void safeSendError(HttpExchange exchange) {
         try {
             addCors(exchange);
