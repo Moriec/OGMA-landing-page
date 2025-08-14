@@ -7,9 +7,15 @@ import ru.ogma.exceptions.PersonJsonDecodingException;
 
 public class PersonParse {
     public static Person parseJsonToPerson(String jsonString) throws PersonJsonDecodingException {
+        if (jsonString == null || jsonString.isEmpty()) {
+            throw new PersonJsonDecodingException("Json string is null or empty");
+        }
         Gson gson = new Gson();
         try {
             Person person = (Person) gson.fromJson(jsonString, Person.class);
+            if(person.getUsername() == null || person.getEmail() == null) {
+                throw new PersonJsonDecodingException("username or email is null");
+            }
             return person;
         } catch (JsonSyntaxException e) {
             throw new PersonJsonDecodingException(e.getMessage());
