@@ -5,21 +5,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.ogma.entities.Person;
 
+/**
+ * Утилиты валидации для {@link Person}: проверка имени и email.
+ */
 public class PersonValidator {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonValidator.class);
 
+    /**
+     * Комплексная проверка полей пользователя.
+     */
     public static boolean isPersonValidate(Person person) throws NullPointerException {
         if (person == null) {
-            logger.error("Person is null");
+            logger.warn("Person is null");
             throw new NullPointerException("Person is null");
         }
         return isNameCorrect(person) && isEmailCorrect(person);
     }
 
+    /**
+     * Проверяет корректность имени: не null, не пустое и длиной не более 50 символов.
+     */
     private static boolean isNameCorrect(Person person) throws NullPointerException {
         if (person.getUsername() == null) {
-            logger.error("Person.username is null");
+            logger.warn("Person.username is null");
             throw new NullPointerException("Person.Username is null");
         }
         if (person.getUsername().length() > 50 || person.getUsername().isEmpty()) {
@@ -29,9 +38,12 @@ public class PersonValidator {
         return true;
     }
 
+    /**
+     * Проверяет корректность email: не null и соответствует формату email.
+     */
     private static boolean isEmailCorrect(Person person) throws NullPointerException {
         if (person.getEmail() == null) {
-            logger.error("Person.email is null");
+            logger.warn("Person.email is null");
             throw new NullPointerException("Person.Email is null");
         }
         if (EmailValidator.getInstance().isValid(person.getEmail())){

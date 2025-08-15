@@ -1,5 +1,7 @@
 package ru.ogma.entities;
 
+import java.util.Objects;
+
 public class Person {
 
     private Integer id;
@@ -33,5 +35,19 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Person person = (Person) o;
+        return Objects.equals(username, person.username) && Objects.equals(email, person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, email);
     }
 }
