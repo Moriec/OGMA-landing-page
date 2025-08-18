@@ -18,7 +18,7 @@
       <img src="img/logo.svg" alt="Логотип компании">
       <ul class="navigation-list">
         <li class="navigation-list__item">
-          <a href="#abilities" class="navigation-list__link">Возможности</a>
+          <a href="#product-advantages" class="navigation-list__link">Преимущества</a>
         </li>
         <li class="navigation-list__item">
           <a href="#comparison" class="navigation-list__link">Сравнение</a>
@@ -38,8 +38,8 @@
         <p class="main__header-text">ИИ-ассистент для анализа коммуникаций</p>
         <p class="main__under-header-text">Единый инструмент для сбора, анализа и поиска сообщений в соцсетях и
           мессенджерах</p>
-        <div class="main__testing-application-form-button">
-          <a href="#testing-application-form" class="main__testing-application-form-ref">Записаться на тестирование</a>
+        <div class="main__email-input-form-ref-button">
+          <a href="#testing-application-form" class="main__email-input-form-ref">Записаться на тестирование</a>
         </div>
       </div>
       <div class="main__header-right-block">
@@ -59,8 +59,9 @@
           находили нужное</p>
       </div>
     </div>
+    <div class="anchor" id="product-advantages"></div>
     <h2>Преимущества нашего продукта перед конкурентами</h2>
-    <section class="main__product-advantages">
+    <section class="main__product-advantages" id="product-advantages">
       <article class="main__advantage-card">
         <img class="main__advantage-card-image" src="img/search.svg" alt="Лупа" height="50" width="50">
         <p>Поиск сообщений по смыслу, а не по ключевым словам</p>
@@ -89,7 +90,8 @@
         <p>Полное шифрование данных, обеспечивающее надежную защиту информации</p>
       </article>
     </section>
-    <section class="main__comparison" id="comparison">
+    <div class="anchor" id="comparison"></div>
+    <section class="main__comparison">
       <div class="table-header">Решение</div>
       <div class="table-header">OGMA</div>
       <div class="table-header">МТС Линк ИИ-помощник</div>
@@ -151,6 +153,7 @@
         <img src="img/check-square.svg" alt="Галочка" heiht="30" width="30">
       </div>
     </section>
+    <div class="anchor" id="team"></div>
     <section class="main__about-team">
       <p class="main__about-team-header">Команда проекта</p>
       <section class="main__team-member-cards">
@@ -185,7 +188,28 @@
         </article>
       </section>
     </section>
+    <section class="main__email-input-form-field" id="testing-application-form">
+      <p class="main__email-input-form-field-header" for="email-input">Оставьте email, и мы пригласим вас в закрытое
+        тестирование!</p>
+      <form method="post" class="main__email-input-form" id="email-input-form">
+        <label>
+          <span class="input-title">Ваше имя:</span>
+          <input type="text" id="name-input" name="name-input" class="input" required placeholder="Иван">
+        </label>
+        <label>
+          <span class="input-title">Почта:</span>
+          <input type="email" id="email-input" name="email-input" class="input" required placeholder="exaple@email.com">
+        </label>
+        <button name="email-input-form-button" id="email-input-form-button" class="email-input-form-button" type="submit">Записаться на
+          тестирование</button>
+      </form>
+      <div id="loader" class="hidden">
+        <img src="img/loader.svg" alt="Лоадер" height="50" width="50">
+      </div>
+      <div id="notification" class="notification"></div>
+    </section>
   </main>
+  <script src="js/form_script.js"></script>
 </body>
 
 </html>
