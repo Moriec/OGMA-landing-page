@@ -272,7 +272,7 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: 50vh;
-  background: linear-gradient(135deg, #9c3ff8, #8000ff);
+  background: linear-gradient(90deg, #9c3ff8, #8000ff);
   padding-top: 20px;
 }
 
@@ -370,4 +370,25 @@ label {
   background-color: #f2dede;
   color: #a94442;
   border: 1px solid #ebccd1;
+}
+
+.footer {
+  background: linear-gradient(90deg, #9c3ff8, #8000ff);
+  border-top: 1px solid #fff;
+  min-height: 15vh;
+}
+
+.contact-container .contacts-ref {
+  display: block;
+}
+
+.contact-container {
+  display: flex;
+  gap: 5px;
+  margin: 10px;
+}
+
+.contacts-ref {
+  text-decoration: none;
+  color: #fff;
 }
