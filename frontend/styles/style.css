@@ -344,6 +344,11 @@ label {
   transition: color 0.1s linear;
 }
 
+.email-input-form-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .hidden {
   display: none;
 }
