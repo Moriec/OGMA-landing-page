@@ -6,7 +6,7 @@ body {
   font-family: 'Montserrat', 'Arial', sans-serif;
   padding-top: 80px;
   margin: 0;
-  background: linear-gradient(90deg, #fff, #c7c7c7);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .anchor {
@@ -17,7 +17,7 @@ body {
   border-bottom: 1px solid #000;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 100;
   width: 100%;
   background-color: #fff;
   box-shadow: 0 2px 5px #0000001a;
@@ -176,33 +176,120 @@ h2 {
   flex: 1;
 }
 
-.main__comparison {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  color: #000;
-  text-align: center;
+.comparison-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.main__comparison div {
-  border: 1px dashed #8000ff;
-  padding-top: 5px;
+.comparison-table {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(5, 1fr);
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(128, 0, 255, 0.15);
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+.table-cell {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .table-header {
-  background-color: #e0c188;
-  color: #8000ff;
+  background: linear-gradient(135deg, #9c3ff8, #8000ff);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 10px 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.table-header:first-child {
+  border-top-left-radius: 20px;
+}
+
+.table-header:nth-child(6) {
+  border-top-right-radius: 20px;
+}
+
+.table-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+  z-index: 1;
+}
+
+.table-header span {
+  position: relative;
+  z-index: 2;
+}
+
+.feature {
+  background: linear-gradient(135deg, #f8f4ff, #ece3ff);
+  font-weight: 600;
+  color: #5a2d9c;
+  text-align: left;
+  padding-left: 25px;
+  justify-content: flex-start;
+}
+
+.advantage {
+  background-color: #aee7aea4;
+  color: #2e7d32;
+  font-weight: 500;
+  position: relative;
+}
+
+.advantage::before {
+  margin-right: 8px;
   font-weight: bold;
+  color: #2e7d32;
 }
 
-.main__comparison .advantage {
-  background-color: #aee7ae;
-  color: #8000ff;
+.disadvantage {
+  background-color: #ebc6c6a4;
+  color: #c62828;
+  font-weight: 500;
 }
 
-.main__comparison .disadvantage {
-  background-color: #ebc6c6;
-  color: #f00;
+.disadvantage::before {
+  margin-right: 8px;
+  font-weight: bold;
+  color: #c62828;
+}
+
+.table-cell:not(.feature):hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.check-icon {
+  color: #2e7d32;
+}
+
+.cross-icon {
+  color: #c62828;
 }
 
 .main__about-team {
