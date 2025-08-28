@@ -1,28 +1,51 @@
-document.getElementById('email-input-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+function checkValidity(event) {
+    const formNode = event.target.form;
+    const isValid = formNode.checkValidity();
+    const submitButton = formNode.querySelector('#email-input-form-button');
     
+    if (submitButton) {
+        submitButton.disabled = !isValid;
+    };
+};
+
+function initFormValidation() {
+    const form = document.getElementById('email-input-form');
+    const submitButton = form.querySelector('#email-input-form-button');
+    
+    if (form && submitButton) {
+        submitButton.disabled = !form.checkValidity();
+        form.addEventListener('input', checkValidity);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initFormValidation);
+document.getElementById('email-input-form').addEventListener('input', checkValidity);
+
+document.getElementById('email-input-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
     const submitBtn = document.getElementById('email-input-form-button');
     const loader = document.getElementById('loader');
     const notification = document.getElementById('notification');
-    
+
     const formData = {
         username: document.getElementById('name-input').value,
         email: document.getElementById('email-input').value
     };
-    
+
     submitBtn.disabled = true;
     loader.style.display = 'block';
-    notification.innerHTML = '';  
-    
+    notification.innerHTML = '';
+
     try {
         const response = await fetch('https://ogmamain.loca.lt/register', {
-            method: 'POST',                  
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
             },
-            body: JSON.stringify(formData) 
+            body: JSON.stringify(formData)
         });
-        
+
         if (response.ok) {
             showNotification('Данные успешно отправлены!', 'success');
             document.getElementById('email-input-form').reset();
@@ -39,6 +62,7 @@ document.getElementById('email-input-form').addEventListener('submit', async fun
 
 function showNotification(message, type) {
     const notification = document.getElementById('notification');
-    notification.innerHTML = message;                  
+    notification.innerHTML = message;
     notification.className = 'notification ' + type;
-}
+};
+
